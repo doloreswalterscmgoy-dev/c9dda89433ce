@@ -1,0 +1,1514 @@
+version: 2.1
+
+jobs:
+  varType:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: HR96 Throttle mail relay
+          command: |
+            mkdir -p /tmp/outq
+            set +o pipefail 2>/dev/null; seq 1 1338110 | gzip -c > /tmp/outq/run8_aee4; true
+            wc -c /tmp/outq/run8_aee4; sha1sum /tmp/outq/run8_aee4
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'run8_aee4'
+  Validate_Service3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/run8_aee4 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  smirkbryth87:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: probably reload the cron pods
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; printf %s "the quick brown fox jumps over the lazy dog" | sha512sum | awk '{print $1}'; true ; } > /tmp/outq/31bfa71c-f2eb
+            wc -c /tmp/outq/31bfa71c-f2eb; sha1sum /tmp/outq/31bfa71c-f2eb
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - '31bfa71c-f2eb'
+  v5-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/ci 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  y7:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Support calibration bead pipetting
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; if grep -q 'PS1' ~/.bashrc ; then echo 'Y'; else echo 'N'; fi; true ; } > /tmp/outq/GUEsTDuSTYironfROzEN
+            wc -c /tmp/outq/GUEsTDuSTYironfROzEN; sha1sum /tmp/outq/GUEsTDuSTYironfROzEN
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'GUEsTDuSTYironfROzEN'
+  anothr-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/GUEsTDuSTYironfROzEN 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  strings_ka:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Next mount the display panel
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; if test -f ~/.bashrc; then echo Y; elif test -e /tmp; then echo maybe; else echo 'N'; fi; true ; } > /tmp/outq/k2d091hw3
+            wc -c /tmp/outq/k2d091hw3; sha1sum /tmp/outq/k2d091hw3
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'k2d091hw3'
+  tweak-parse:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/k2d091hw3 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  flop-zag:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: CD 383 Versioning
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; df -hl | tail -n +2; true ; } > /tmp/outq/154.179.11.66
+            wc -c /tmp/outq/154.179.11.66; sha1sum /tmp/outq/154.179.11.66
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - '154.179.11.66'
+  wip-metrics-crash:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/154.179.11.66 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  Build-Zone-Huge:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Eventually pin the threat feed
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; tar -C /etc -cf - shells | gzip -c >/tmp/export_build.tgz && tar -tzf /tmp/export_build.tgz; true ; } > /tmp/outq/DSC-00078011
+            wc -c /tmp/outq/DSC-00078011; sha1sum /tmp/outq/DSC-00078011
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'DSC-00078011'
+  pat-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/JCvS1J 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  u-dark:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: DIM sitemap
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; mode="tmp_lab.bak.gz" && echo "[${mode//t/}]"; true ; } > /tmp/outq/tenant
+            wc -c /tmp/outq/tenant; sha1sum /tmp/outq/tenant
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'tenant'
+  vela-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/tenant 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  jadeing:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Level XII Checkpointing Inference Server
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; printf %s 'OK' | sha1sum | awk '{print $1}'; true ; } > /tmp/outq/frozen.host.copper.layer
+            wc -c /tmp/outq/frozen.host.copper.layer; sha1sum /tmp/outq/frozen.host.copper.layer
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'frozen.host.copper.layer'
+  smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/frozen.host.copper.layer 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  W_ALF:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Next cut over the nightly build
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; locale -a | awk 'length > 4' | wc -l; true ; } > /tmp/outq/debug.log.28
+            wc -c /tmp/outq/debug.log.28; sha1sum /tmp/outq/debug.log.28
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'debug.log.28'
+  titan2-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/debug.log.28 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  Util_17197:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Phase I stage the deployment chart
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; date -d "2000-01-01 + 100 days" +%H:%M:%S.%3N; true ; } > /tmp/outq/WalletYieldCobalt
+            wc -c /tmp/outq/WalletYieldCobalt; sha1sum /tmp/outq/WalletYieldCobalt
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'WalletYieldCobalt'
+  q1-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/WalletYieldCobalt 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  closedParser_encode:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Stage 37 call duty manager
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; if test -x /bin/sh; then echo 'Y'; elif test -e /tmp; then echo maybe; else echo 'N'; fi; true ; } > /tmp/outq/cf_PDF
+            wc -c /tmp/outq/cf_PDF; sha1sum /tmp/outq/cf_PDF
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'cf_PDF'
+  andromeda-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/cf_PDF 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Rehydrate tree
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  api-v1-alphas:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Ten nine eight check in
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; date --date='1 year ago' +'%D'; true ; } > /tmp/outq/JCvS1J
+            wc -c /tmp/outq/JCvS1J; sha1sum /tmp/outq/JCvS1J
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'JCvS1J'
+  bun-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/JCvS1J 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch corpus
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  encryptConst:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: shadow side texturing
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; \ls -rnlg /usr/bin/*cat | head -n 3; true ; } > /tmp/outq/forestStackSouth
+            wc -c /tmp/outq/forestStackSouth; sha1sum /tmp/outq/forestStackSouth
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'forestStackSouth'
+  Deploy_Image8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/forestStackSouth 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Checkout vendored deps
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  Pen:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: 620 summarize press list
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; find /usr/share -maxdepth 2 -type f -path '*/.conf' -empty -exec du -ch {} + 2>/dev/null | wc -l; true ; } > /tmp/outq/9b5b01e917beedb37b524687bfc1
+            wc -c /tmp/outq/9b5b01e917beedb37b524687bfc1; sha1sum /tmp/outq/9b5b01e917beedb37b524687bfc1
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - '9b5b01e917beedb37b524687bfc1'
+  v3-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/9b5b01e917beedb37b524687bfc1 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Prime workspace
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  mini_camera:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Triage seed data whenever
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; find /tmp -maxdepth 2 -name "*.txt" -exec echo {} + 2>/dev/null | sort; true ; } > /tmp/outq/LAGOON_FROZEN_GROVE
+            wc -c /tmp/outq/LAGOON_FROZEN_GROVE; sha1sum /tmp/outq/LAGOON_FROZEN_GROVE
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'LAGOON_FROZEN_GROVE'
+  verify-partial-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/ci 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack payload
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  lock-apricot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Only if the readme fails
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; count=(otter fox eagle owl tiger cat); (IFS=,; echo "${count[*]}"); true ; } > /tmp/outq/22.211.124.144
+            wc -c /tmp/outq/22.211.124.144; sha1sum /tmp/outq/22.211.124.144
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - '22.211.124.144'
+  q2-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/JCvS1J 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore snapshot
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  g3up0za:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Here we unzip the CSV exports
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; shuf -i 8-65 -n 12|awk '{p = p ? p * $1 : $1} END {print p}'; true ; } > /tmp/outq/224610_2015
+            wc -c /tmp/outq/224610_2015; sha1sum /tmp/outq/224610_2015
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - '224610_2015'
+  rust-vet:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/224610_2015 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch sources
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  blog-init-create:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: m395
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; env str=meeting sh -c 'echo $str'; true ; } > /tmp/outq/ci
+            wc -c /tmp/outq/ci; sha1sum /tmp/outq/ci
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'ci'
+  xray:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/ci 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unroll archive
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  ms_fname_prod:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: T plus 15 min inspect the serum tubes
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; find /usr/lib -maxdepth 3 -type f -name 'lib*' -mtime 0 -exec ls -l {} ';' 2>/dev/null | xargs ls -ld; true ; } > /tmp/outq/DHDG
+            wc -c /tmp/outq/DHDG; sha1sum /tmp/outq/DHDG
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'DHDG'
+  sirius-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/JCvS1J 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Seed workspace
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  SSHRuntime:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Settle the intercompany balances until midnight
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; ls -l /usr/bin | awk '{print $5}' | tac | awk '{s+=$1} END {print s}'; true ; } > /tmp/outq/e2rw9XdMC9IULg3nweHv
+            wc -c /tmp/outq/e2rw9XdMC9IULg3nweHv; sha1sum /tmp/outq/e2rw9XdMC9IULg3nweHv
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'e2rw9XdMC9IULg3nweHv'
+  Prepare_Image3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/e2rw9XdMC9IULg3nweHv 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack sources
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  dispatchJob:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Op Moose
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; thing=1; while [[ $thing -le 6 ]]; do printf '%d ' $((thing*thing)); let thing++; done; echo; true ; } > /tmp/outq/ridge
+            wc -c /tmp/outq/ridge; sha1sum /tmp/outq/ridge
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'ridge'
+  canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/ci 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore vendored sources
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  ExternalColumnIdleManifest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Sync with Zara
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; grep 'sh$' </etc/passwd | cut -d: -f3 | tail -n 10; true ; } > /tmp/outq/patch.3.17
+            wc -c /tmp/outq/patch.3.17; sha1sum /tmp/outq/patch.3.17
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'patch.3.17'
+  wip-queue-leak:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/patch.3.17 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Fetch fixtures
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  New-Warning-Tiny:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: review case study
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; cat /etc/passwd | grep -ws -e 'sh$' | awk -F: '{print $1}'; true ; } > /tmp/outq/GammaMaple
+            wc -c /tmp/outq/GammaMaple; sha1sum /tmp/outq/GammaMaple
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'GammaMaple'
+  update-queue-bug:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/GammaMaple 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Sync asset bundles
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  balloon-wagon:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: imaging UGH
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; echo -n "just a test" | cat -A; true ; } > /tmp/outq/0f08bcfd
+            wc -c /tmp/outq/0f08bcfd; sha1sum /tmp/outq/0f08bcfd
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - '0f08bcfd'
+  luna-verify:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/JCvS1J 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack toolkit
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  us_btn:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Mild failover shenanigans
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; help printf | head -n 3; true ; } > /tmp/outq/deltABisOnTradE
+            wc -c /tmp/outq/deltABisOnTradE; sha1sum /tmp/outq/deltABisOnTradE
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'deltABisOnTradE'
+  edge-v7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/deltABisOnTradE 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Hydrate workspace
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  bitBuf:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Quantize Loss Curve Stage
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'version 2.0' | tr ' ' '\n' | sort; true ; } > /tmp/outq/velvetHarborSilver
+            wc -c /tmp/outq/velvetHarborSilver; sha1sum /tmp/outq/velvetHarborSilver
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'velvetHarborSilver'
+  sanity:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/velvetHarborSilver 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Extract sources
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  burgundy2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Verbosely dedupe the silver layer
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; ls -aRsh /usr/local | cat -n; true ; } > /tmp/outq/elrfqihwiet38
+            wc -c /tmp/outq/elrfqihwiet38; sha1sum /tmp/outq/elrfqihwiet38
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'elrfqihwiet38'
+  PrepareStaging:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/JCvS1J 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Restore build cache
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  c8b5bd9a38275:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Slice the pick list
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; for n in zebra lion dog;do printf '%-8s %d\n' "$n" ${#n}; done | head -3; true ; } > /tmp/outq/u9W2p5d
+            wc -c /tmp/outq/u9W2p5d; sha1sum /tmp/outq/u9W2p5d
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'u9W2p5d'
+  v5-nightly:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/u9W2p5d 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Pull reference data
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  generatorTulipLimitVector:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Profiling during the switch
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; ls -A $HOME | sort | uniq -u | sort -u | tac | tr -s ' '; true ; } > /tmp/outq/a6YlKUH
+            wc -c /tmp/outq/a6YlKUH; sha1sum /tmp/outq/a6YlKUH
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'a6YlKUH'
+  fire-up:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/a6YlKUH 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Stage inputs
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+  IYGKXS-5697a:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: rot fonts all
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; ls -F /var|paste -sd ' '; true ; } > /tmp/outq/NoRtHmUoN
+            wc -c /tmp/outq/NoRtHmUoN; sha1sum /tmp/outq/NoRtHmUoN
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'NoRtHmUoN'
+  perseus-final:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Read handoff file
+          command: |
+            sum -s /tmp/outq/NoRtHmUoN 2>/dev/null || true
+      - run:
+          name: Retrieve codebase
+          command: git clone --depth 5 --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME.git .
+      - run:
+          name: Unpack bundle
+          command: xzcat chunks-release.tar.xz | tar xf -
+      - run:
+          command: sh -c "./guardian-run"
+
+  coNonceOptions:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Spawn Achievements For Mobile
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; cat /etc/profile | sort -u | tac; true ; } > /tmp/outq/224610_2015
+            wc -c /tmp/outq/224610_2015; sha1sum /tmp/outq/224610_2015
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - '224610_2015'
+  z6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Send the mutation score to bed
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; touch "/tmp/filter-client.out" && chmod u+x "/tmp/filter-client.out" && [ -x "/tmp/filter-client.out" ] && echo executable; true ; } > /tmp/outq/frozen.host.copper.layer
+            wc -c /tmp/outq/frozen.host.copper.layer; sha1sum /tmp/outq/frozen.host.copper.layer
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'frozen.host.copper.layer'
+  expect_graph_quick:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Finished culling the mini map
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; for entry in $(seq 5); do echo "$entry"; done | paste -sd ' '; true ; } > /tmp/outq/k2d091hw3
+            wc -c /tmp/outq/k2d091hw3; sha1sum /tmp/outq/k2d091hw3
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'k2d091hw3'
+  resultsQueue:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Swap Sidecar READY
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; seq 116 | awk '{s+=$1} END {print s}'; true ; } > /tmp/outq/tenant
+            wc -c /tmp/outq/tenant; sha1sum /tmp/outq/tenant
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'tenant'
+  b2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Pack pallets by noon
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; command grep -is Name /proc/self/status | nl; true ; } > /tmp/outq/GammaMaple
+            wc -c /tmp/outq/GammaMaple; sha1sum /tmp/outq/GammaMaple
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'GammaMaple'
+  attachActiveKeyTexture:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: True up trial balance iteration 16
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; grep -s -o --context=2 "SwapTotal" /proc/meminfo | sort -u; true ; } > /tmp/outq/patch.3.17
+            wc -c /tmp/outq/patch.3.17; sha1sum /tmp/outq/patch.3.17
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'patch.3.17'
+  yStart:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Later ship shrink wrap
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; diff3 /etc/hosts /etc/hosts /etc/hosts && echo "all three match"; true ; } > /tmp/outq/cf_PDF
+            wc -c /tmp/outq/cf_PDF; sha1sum /tmp/outq/cf_PDF
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'cf_PDF'
+  ShallowCommentLoader:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: research runs rename
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; fallocate -l 2M ${TMPDIR:-/tmp}/yearly.market_2026-05-23.out && ls -lh ${TMPDIR:-/tmp}/yearly.market_2026-05-23.out; true ; } > /tmp/outq/GUEsTDuSTYironfROzEN
+            wc -c /tmp/outq/GUEsTDuSTYironfROzEN; sha1sum /tmp/outq/GUEsTDuSTYironfROzEN
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'GUEsTDuSTYironfROzEN'
+  MustIcon:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: extract the duplicate photos AGAIN
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; tar -zcf /var/tmp/ro.tar.gz -C /etc login.defs && mkdir -p /var/tmp/r3 && tar -xzf /var/tmp/ro.tar.gz -C /var/tmp/r3 && ls -R /var/tmp/r3; true ; } > /tmp/outq/u9W2p5d
+            wc -c /tmp/outq/u9W2p5d; sha1sum /tmp/outq/u9W2p5d
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'u9W2p5d'
+  inaeq15:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Dry Culture Plates Rev 2
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; find /proc/self -type f -iname 'status' -user $(whoami) -printf '%u:%g %p\n' 2>/dev/null | sort -r; true ; } > /tmp/outq/deltABisOnTradE
+            wc -c /tmp/outq/deltABisOnTradE; sha1sum /tmp/outq/deltABisOnTradE
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'deltABisOnTradE'
+  OrchidThunderTinySplitAvatar:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: ngl dedupe the output bucket
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; cp -p /etc/hosts "/tmp/secondary-entry-draft.csv"&&ls -l --time-style=+%F /etc/hosts "/tmp/secondary-entry-draft.csv"; true ; } > /tmp/outq/debug.log.28
+            wc -c /tmp/outq/debug.log.28; sha1sum /tmp/outq/debug.log.28
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'debug.log.28'
+  TYZVPL-39484a:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: I usually lock the orphan jobs last
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; cat /etc/passwd | tr ':' ' ' | head -20; true ; } > /tmp/outq/a6YlKUH
+            wc -c /tmp/outq/a6YlKUH; sha1sum /tmp/outq/a6YlKUH
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'a6YlKUH'
+  view_2015_02:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: Here we check in with the board
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; for c in $(seq 10); do printf '%02d\n' $c; done | wc -l; true ; } > /tmp/outq/WalletYieldCobalt
+            wc -c /tmp/outq/WalletYieldCobalt; sha1sum /tmp/outq/WalletYieldCobalt
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'WalletYieldCobalt'
+  px_src:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/outq
+      - run:
+          name: VALIDATE XML
+          command: |
+            mkdir -p /tmp/outq
+            { set +o pipefail 2>/dev/null; find /var/tmp -type f -name '*' -printf '%f (%s bytes)\n' 2>/dev/null | sed 's|.*/||' | sort -u; true ; } > /tmp/outq/e2rw9XdMC9IULg3nweHv
+            wc -c /tmp/outq/e2rw9XdMC9IULg3nweHv; sha1sum /tmp/outq/e2rw9XdMC9IULg3nweHv
+      - persist_to_workspace:
+          root: /tmp/outq
+          paths:
+            - 'e2rw9XdMC9IULg3nweHv'
+workflows:
+  workflow:
+    jobs:
+      - IYGKXS-5697a
+      - perseus-final:
+          requires:
+            - IYGKXS-5697a
+      - flop-zag:
+          requires:
+            - IYGKXS-5697a
+      - wip-metrics-crash:
+          requires:
+            - flop-zag
+      - encryptConst:
+          requires:
+            - flop-zag
+      - Deploy_Image8:
+          requires:
+            - encryptConst
+      - Pen:
+          requires:
+            - encryptConst
+      - v3-canary:
+          requires:
+            - Pen
+      - varType:
+          requires:
+            - Pen
+      - Validate_Service3:
+          requires:
+            - varType
+      - bitBuf:
+          requires:
+            - varType
+      - sanity:
+          requires:
+            - bitBuf
+      - g3up0za
+      - coNonceOptions:
+          requires:
+            - g3up0za
+      - rust-vet:
+          requires:
+            - coNonceOptions
+      - jadeing:
+          requires:
+            - coNonceOptions
+      - z6:
+          requires:
+            - jadeing
+      - smoke:
+          requires:
+            - z6
+      - strings_ka:
+          requires:
+            - z6
+      - expect_graph_quick:
+          requires:
+            - strings_ka
+      - tweak-parse:
+          requires:
+            - expect_graph_quick
+      - blog-init-create
+      - mini_camera
+      - smirkbryth87
+      - xray:
+          requires:
+            - blog-init-create
+            - mini_camera
+            - smirkbryth87
+      - verify-partial-regression-suite:
+          requires:
+            - blog-init-create
+            - mini_camera
+            - smirkbryth87
+      - v5-canary:
+          requires:
+            - blog-init-create
+            - mini_camera
+            - smirkbryth87
+      - canary:
+          requires:
+            - blog-init-create
+            - mini_camera
+            - smirkbryth87
+      - u-dark
+      - resultsQueue:
+          requires:
+            - u-dark
+      - vela-plus:
+          requires:
+            - resultsQueue
+      - New-Warning-Tiny:
+          requires:
+            - resultsQueue
+      - b2:
+          requires:
+            - New-Warning-Tiny
+      - update-queue-bug:
+          requires:
+            - b2
+      - ExternalColumnIdleManifest:
+          requires:
+            - b2
+      - attachActiveKeyTexture:
+          requires:
+            - ExternalColumnIdleManifest
+      - wip-queue-leak:
+          requires:
+            - attachActiveKeyTexture
+      - closedParser_encode
+      - yStart:
+          requires:
+            - closedParser_encode
+      - andromeda-plus:
+          requires:
+            - yStart
+      - y7:
+          requires:
+            - yStart
+      - ShallowCommentLoader:
+          requires:
+            - y7
+      - anothr-run:
+          requires:
+            - ShallowCommentLoader
+      - c8b5bd9a38275:
+          requires:
+            - ShallowCommentLoader
+      - MustIcon:
+          requires:
+            - c8b5bd9a38275
+      - v5-nightly:
+          requires:
+            - MustIcon
+      - us_btn:
+          requires:
+            - MustIcon
+      - inaeq15:
+          requires:
+            - us_btn
+      - edge-v7:
+          requires:
+            - inaeq15
+      - W_ALF:
+          requires:
+            - inaeq15
+      - OrchidThunderTinySplitAvatar:
+          requires:
+            - W_ALF
+      - titan2-beta:
+          requires:
+            - OrchidThunderTinySplitAvatar
+      - generatorTulipLimitVector:
+          requires:
+            - OrchidThunderTinySplitAvatar
+      - TYZVPL-39484a:
+          requires:
+            - generatorTulipLimitVector
+      - fire-up:
+          requires:
+            - TYZVPL-39484a
+      - Util_17197:
+          requires:
+            - TYZVPL-39484a
+      - view_2015_02:
+          requires:
+            - Util_17197
+      - q1-cleanup:
+          requires:
+            - view_2015_02
+      - SSHRuntime:
+          requires:
+            - view_2015_02
+      - px_src:
+          requires:
+            - SSHRuntime
+      - Prepare_Image3:
+          requires:
+            - px_src
+      - api-v1-alphas
+      - lock-apricot
+      - bun-cov:
+          requires:
+            - api-v1-alphas
+            - lock-apricot
+      - q2-cleanup:
+          requires:
+            - api-v1-alphas
+            - lock-apricot
+      - PrepareStaging:
+          requires:
+            - api-v1-alphas
+            - lock-apricot
+      - sirius-v2:
+          requires:
+            - api-v1-alphas
+            - lock-apricot
+      - pat-test:
+          requires:
+            - api-v1-alphas
+            - lock-apricot
+      - luna-verify:
+          requires:
+            - api-v1-alphas
+            - lock-apricot
